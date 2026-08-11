@@ -1,0 +1,1 @@
+console.log("Javascript in Depth - Types");

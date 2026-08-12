@@ -99,9 +99,89 @@ console.log('Number.parseInt("40"): ' , Number.parseInt("40")); //40
 
 console.log(parseInt == Number.parseInt); //true: Because both reference to the same function
 
+/*Verify Other global functions as well*/
+console.log(isNaN == Number.isNaN) //false: Both are different functions
+console.log(isFinite == Number.isFinite); //false: Both are different functions
+console.log(parseFloat == Number.parseFloat); //true: Because both reference to the same function
+
+//Rest Static Methods
+
+console.log(Number.isSafeInteger('50c')); //false
+console.log(Number.isSafeInteger('')); //false
+console.log(Number.isSafeInteger('50')); //false
+console.log(Number.isSafeInteger(50e100)); //false : too big integer
+console.log(Number.isSafeInteger({})); //true
+console.log(Number.isSafeInteger(50)); //true
+console.log(Number.isSafeInteger(50e10)); //true
+console.log(Number.isSafeInteger(NaN)); //false
+
 
 // Number Methods
 
 
 
 
+//🔥 Challenge: Mini Financial Transaction Engine
+/*
+Build a JavaScript function:
+
+processTransactions(transactions)
+
+It receives an array of transaction objects:
+
+const transactions = [
+    { id: 1, amount: "1500" },
+    { id: 2, amount: "250.50" },
+    { id: 3, amount: "50px" },
+    { id: 4, amount: 0 },
+    { id: 5, amount: "-350" },
+    { id: 6, amount: "abc" },
+    { id: 7, amount: Infinity },
+    { id: 8, amount: "9007199254740992" },
+    { id: 9, amount: "75.25" },
+    { id: 10, amount: null }
+];
+
+Your function should produce a report containing:
+
+Total valid transactions
+Total invalid transactions
+Total amount
+Average amount
+Highest transaction
+Lowest transaction
+Positive transactions
+Negative transactions
+Zero transactions
+Unsafe integer transactions
+NaN transactions
+Infinite transactions
+But here's the difficult part
+
+You cannot simply do:
+
+Number(amount)
+
+and call it a day.
+
+You need to decide what constitutes a valid financial amount.
+
+For example, decide what should happen with:
+
+"1500"       // ?
+"1500.50"    // ?
+"50px"       // ?
+""
+" "
+null
+undefined
+true
+Infinity
+NaN
+"9007199254740992"
+0
+-50
+
+You have to establish the rules yourself.
+
+*/

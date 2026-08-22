@@ -1,3 +1,26 @@
+/*Concepts*/
+
+/**
+ * JavaScript implicitly converts the values to boolean in the boolean context.
+ * 
+ * i.e 
+ * const name = "abc";
+ * if(name)
+*/
+
+ const name = "asad";
+ if(name){
+    console.log('Name is: ' , name);
+ }
+
+ //How this work internally
+ /* the name is converted to Boolean automatically roughly like this: Boolean(name) and then it will be checked. */
+ //You can also convert a value to Boolean using double ! (!!)
+console.log(Boolean(0))
+console.log(!!0);
+//Both are the same.
+
+
 /* EXERCISE */
 
 /**
@@ -128,13 +151,21 @@ function evaluateTransaction(transaction) {
     (transaction.amount > 50000 && !transaction.isVerifiedUser) ||
     (transaction.isSuspicious && transaction.isBlockedCountry) ||
     (transaction.isSuspicious && !transaction.isVerifiedUser) ||
-    (transaction.isBlockedCountry && !transaction.isVerifiedUser) 
+    (transaction.isBlockedCountry && !transaction.isVerifiedUser);
+
+
+    let needsAdditionalAuthentication = (transaction.amount > 10000 && !transaction.hasTwoFactorAuth) ||
+    (transaction.isSuspicious && transaction.isVerifiedUser);
+
+    let finalDecision = !canProcess ? 'REJECTED' : (requiresManualReview ? 'MANUAL_REVIEW' : 'APPROVED');
 
     return {
         canProcess,
         requiresManualReview,
         canAutoApprove,
-        isHighRisk
+        isHighRisk,
+        needsAdditionalAuthentication,
+        finalDecision
     };
 }
 

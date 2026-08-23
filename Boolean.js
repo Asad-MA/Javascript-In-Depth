@@ -21,6 +21,25 @@ console.log(!!0);
 //Both are the same.
 
 
+/* IMP */
+//[] is truthy but is loosly equals to false
+if([]) console.log("[] is truthy that's why it is running...")
+
+console.log([] == false) //true : Because it is losely equal to false
+/*
+How "[] == false" works internaly
+First it is converted to its primitive value using `toString` method which return empty string ''
+Then the empty string is convert to Boolean using Boolean as a Function
+
+See Below steps
+*/
+
+console.log([].toString());
+
+console.log(Boolean([].toString()));
+//Simply anything that is coerced to 0 will truthy but also loosely equals to false 
+
+
 /* EXERCISE */
 
 /**

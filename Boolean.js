@@ -37,8 +37,15 @@ See Below steps
 console.log([].toString());
 
 console.log(Boolean([].toString()));
-//Simply anything that is coerced to 0 will truthy but also loosely equals to false 
+//Simply anything that is coerced to 0 will truthy but also loosely equals to false
 
+/* Instance Methods */
+//toString()
+const bol = Boolean('Test');
+console.log(bol.toString()) //
+
+//valueOf()
+console.log(bol.valueOf()); //
 
 /* EXERCISE */
 

@@ -55,3 +55,125 @@ console.log(array.lastIndexOf(NaN))
 //Value finding can find the NaN
 console.log(array.includes(NaN));
 console.log(array.findIndex(n => Number.isNaN(n))) //4
+
+
+/* Brainstroming */
+/*
+
+🧠 Brainstorming Task: Transaction Analyzer — NaN Edition
+
+You receive transaction data where amount can be:
+
+a valid number
+NaN
+a numeric string
+a non-numeric string
+null
+undefined
+Infinity
+-Infinity
+
+Your job is to build a function:
+
+function analyzeTransactions(transactions) {
+    // your implementation
+}
+
+Example input:
+
+const transactions = [
+    { id: 1, amount: 1500 },
+    { id: 2, amount: NaN },
+    { id: 3, amount: "2500" },
+    { id: 4, amount: "abc" },
+    { id: 5, amount: null },
+    { id: 6, amount: undefined },
+    { id: 7, amount: Infinity },
+    { id: 8, amount: -Infinity },
+    { id: 9, amount: 500 }
+];
+
+Your analyzer should produce something conceptually like:
+
+{
+    validNumbers: 2,
+    nanValues: 1,
+    numericStrings: 1,
+    invalidStrings: 1,
+    nullValues: 1,
+    undefinedValues: 1,
+    infiniteValues: 2,
+
+    totalValidAmount: 2000,
+    averageValidAmount: 1000
+}
+
+*/
+
+function analyzeTransactions(transactions) {
+    const result = {    
+        validNumbers: 0,
+        nanValues: 0,
+        numericStrings: 0,
+        invalidStrings: 0,
+        nullValues: 0,
+        undefinedValues: 0,
+        infiniteValues: 0,
+        totalValidAmount: 0,
+        averageValidAmount: 0
+    }
+    transactions.forEach(transaction => {
+        const {amount} = transaction;
+        const type = typeof amount;
+        if(type === 'number'){
+            if(Number.isFinite(amount)){
+                result.validNumbers++;
+                result.totalValidAmount += amount;
+                result.averageValidAmount = result.totalValidAmount / result.validNumbers;
+            }
+           else if(Number.isNaN(amount)){
+                result.nanValues++;
+           }
+           else{
+                result.infiniteValues++;
+           }
+        }
+        else if(type === 'string' ){
+            (amount.trim().length && !isNaN(amount)) ? result.numericStrings++ : result.invalidStrings++;
+        }
+        else if(type === 'undefined'){
+            result.undefinedValues ++;
+        }
+        else if(amount === null){
+            result.nullValues ++;
+        }
+    });
+
+    return result;
+}
+
+
+const transactions = [
+    { id: 1, amount: 1500 },
+    { id: 2, amount: NaN },
+    { id: 2, amount: NaN },
+
+    { id: 2, amount: NaN },
+
+    { id: 3, amount: "2500" },
+    { id: 4, amount: "abc" },
+    { id: 5, amount: null },
+    { id: 5, amount: null },
+    { id: 5, amount: 'null' },
+    { id: 6, amount: undefined },
+    { id: 6, amount: undefined },
+    { id: 6, amount: undefined },
+    { id: 6, amount: undefined },
+    { id: 7, amount: Infinity },
+    { id: 8, amount: -Infinity },
+    { id: 9, amount: 500 }
+];
+
+const analyzer = analyzeTransactions(transactions);
+
+console.log(analyzer)
